@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 1 - Advice with SHOULD 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root{--pink:#FF6B9D;--purple:#9B59B6;--orange:#FF8C42;--teal:#20B2AA;--red:#E74C3C;--cream:#FFF8E7;--green:#27AE60;--blue:#45B7D1;--card-shadow:0 8px 20px rgba(0,0,0,.15);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#87CEEB 0%,#B0E0FF 40%,#E8F8E8 70%,#5DBB63 100%);min-height:100vh;overflow-x:hidden;}
+  .cloud{position:fixed;background:white;border-radius:50px;opacity:.85;z-index:0;animation:floatCloud linear infinite;}
+  .cloud::before,.cloud::after{content:'';position:absolute;background:white;border-radius:50%;}
+  .cloud1{width:120px;height:40px;top:8%;animation-duration:30s;left:-150px;}.cloud1::before{width:60px;height:55px;top:-25px;left:20px;}.cloud1::after{width:45px;height:40px;top:-18px;left:55px;}
+  .cloud2{width:90px;height:30px;top:18%;animation-duration:40s;animation-delay:-15s;left:-120px;}.cloud2::before{width:45px;height:45px;top:-22px;left:12px;}.cloud2::after{width:35px;height:30px;top:-14px;left:40px;}
+  .cloud3{width:150px;height:50px;top:5%;animation-duration:50s;animation-delay:-30s;left:-180px;}.cloud3::before{width:75px;height:65px;top:-30px;left:25px;}.cloud3::after{width:60px;height:50px;top:-22px;left:70px;}
+  @keyframes floatCloud{from{transform:translateX(0)}to{transform:translateX(110vw)}}
+  .sun{position:fixed;top:20px;right:40px;width:70px;height:70px;background:radial-gradient(circle,#FFE566,#FFB300);border-radius:50%;box-shadow:0 0 30px #FFD700,0 0 60px #FFA500;animation:spinSun 12s linear infinite;z-index:0;}
+  .sun::before{content:'☀️';font-size:52px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+  @keyframes spinSun{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .bird{position:fixed;font-size:24px;animation:flyBird linear infinite;z-index:0;}
+  .bird1{top:12%;animation-duration:20s;animation-delay:-5s;left:-40px;}.bird2{top:22%;animation-duration:25s;animation-delay:-12s;left:-40px;}
+  @keyframes flyBird{from{left:-60px}to{left:105vw}}
+  .stars-bg{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .star{position:absolute;font-size:1.2rem;animation:twinkleStar 3s ease-in-out infinite;opacity:.6;}
+  @keyframes twinkleStar{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.8;transform:scale(1.3)}}
+  .container{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:20px 16px 60px;}
+  /* header */
+  .header{text-align:center;padding:28px 20px 16px;animation:bounceIn .8s ease;}
+  @keyframes bounceIn{0%{transform:scale(.3) translateY(-50px);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+  .header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,3rem);color:white;text-shadow:3px 3px 0 #FF6B9D,6px 6px 0 rgba(0,0,0,.1);line-height:1.2;margin-bottom:8px;}
+  .subtitle{font-size:1rem;color:#fff;background:rgba(255,255,255,.25);display:inline-block;padding:5px 18px;border-radius:30px;backdrop-filter:blur(5px);margin-bottom:14px;}
+  .lang-bar{display:flex;justify-content:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+  .lang-btn{background:white;border:3px solid var(--pink);border-radius:30px;padding:7px 18px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;color:var(--pink);transition:all .2s;box-shadow:0 4px 10px rgba(0,0,0,.1);}
+  .lang-btn.active,.lang-btn:hover{background:var(--pink);color:white;transform:translateY(-2px);box-shadow:0 6px 15px rgba(255,107,157,.4);}
+  .lang-btn.ipa-btn{border-color:var(--purple);color:var(--purple);}
+  .lang-btn.ipa-btn.active,.lang-btn.ipa-btn:hover{background:var(--purple);color:white;box-shadow:0 6px 15px rgba(155,89,182,.4);}
+  .audio-bar{display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+  .audio-btn{background:linear-gradient(135deg,#FFD700,#FFA500);border:none;border-radius:30px;padding:7px 18px;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;color:#5D4037;transition:all .2s;box-shadow:0 4px 10px rgba(0,0,0,.15);display:flex;align-items:center;gap:6px;}
+  .audio-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 18px rgba(0,0,0,.2);}
+  .audio-btn.muted{background:linear-gradient(135deg,#ccc,#aaa);}
+  /* section cards */
+  .section-card{background:var(--cream);border-radius:24px;padding:22px;margin-bottom:22px;box-shadow:var(--card-shadow);animation:slideUp .6s ease both;position:relative;overflow:hidden;}
+  .section-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;border-radius:24px 24px 0 0;}
+  .section-card.pink::before{background:linear-gradient(90deg,#FF6B9D,#FF9ED2);}
+  .section-card.blue::before{background:linear-gradient(90deg,#4ECDC4,#45B7D1);}
+  .section-card.orange::before{background:linear-gradient(90deg,#FF8C42,#FFB347);}
+  .section-card.green::before{background:linear-gradient(90deg,#5DBB63,#80CC75);}
+  .section-card.purple::before{background:linear-gradient(90deg,#9B59B6,#BE84D1);}
+  .section-card.teal::before{background:linear-gradient(90deg,#20B2AA,#48D1CC);}
+  .section-card.red::before{background:linear-gradient(90deg,#E74C3C,#FF7675);}
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .section-num{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;font-family:'Fredoka One',cursive;font-size:1.2rem;color:white;margin-right:8px;flex-shrink:0;}
+  .num-pink{background:linear-gradient(135deg,#FF6B9D,#FF9ED2);}.num-blue{background:linear-gradient(135deg,#4ECDC4,#45B7D1);}.num-orange{background:linear-gradient(135deg,#FF8C42,#FFB347);}.num-green{background:linear-gradient(135deg,#5DBB63,#80CC75);}.num-purple{background:linear-gradient(135deg,#9B59B6,#BE84D1);}.num-teal{background:linear-gradient(135deg,#20B2AA,#48D1CC);}.num-red{background:linear-gradient(135deg,#E74C3C,#FF7675);}
+  .section-title{font-family:'Fredoka One',cursive;font-size:1.3rem;display:flex;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:6px;color:#333;}
+  /* play button */
+  .play-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF6B9D,#FF9ED2);border:none;cursor:pointer;font-size:.85rem;flex-shrink:0;transition:all .2s;box-shadow:0 2px 8px rgba(255,107,157,.4);vertical-align:middle;margin-right:4px;color:white;font-weight:900;}
+  .play-btn:hover{transform:scale(1.2);}
+  .play-btn.gp{background:linear-gradient(135deg,#5DBB63,#80CC75);box-shadow:0 2px 8px rgba(93,187,99,.4);}
+  .play-btn.bp{background:linear-gradient(135deg,#45B7D1,#4ECDC4);box-shadow:0 2px 8px rgba(69,183,209,.4);}
+  .play-btn.op{background:linear-gradient(135deg,#FF8C42,#FFB347);box-shadow:0 2px 8px rgba(255,140,66,.4);}
+  .play-btn.pp{background:linear-gradient(135deg,#9B59B6,#BE84D1);box-shadow:0 2px 8px rgba(155,89,182,.4);}
+  .play-btn.tp{background:linear-gradient(135deg,#20B2AA,#48D1CC);box-shadow:0 2px 8px rgba(32,178,170,.4);}
+  /* sent row */
+  .sent-row{display:flex;align-items:flex-start;gap:8px;background:white;border-radius:14px;padding:10px 14px;margin-bottom:8px;box-shadow:0 3px 8px rgba(0,0,0,.07);cursor:pointer;transition:all .2s;border:2px solid transparent;flex-wrap:wrap;}
+  .sent-row:hover{border-color:var(--pink);transform:translateX(3px);}
+  .snum{display:inline-flex;width:26px;height:26px;border-radius:50%;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;flex-shrink:0;margin-top:2px;color:white;}
+  .sent-content{flex:1;font-size:.97rem;font-weight:600;color:#333;line-height:1.6;}
+  .viet{display:block;font-size:.78rem;color:#888;font-weight:700;margin-top:2px;}
+  .ipa-text{display:none;font-size:.73rem;color:#9B59B6;font-style:italic;margin-top:1px;}
+  .should{color:#27AE60;font-weight:900;}.shouldnt{color:#E74C3C;font-weight:900;}.qword{color:#2980B9;font-weight:900;}
+  /* subject table */
+  .subj-table{width:100%;border-collapse:collapse;margin-top:8px;border-radius:14px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+  .subj-table th{background:linear-gradient(135deg,#45B7D1,#4ECDC4);color:white;padding:10px 12px;font-family:'Fredoka One',cursive;font-size:.9rem;text-align:left;}
+  .subj-table td{padding:9px 12px;font-size:.88rem;font-weight:600;border-bottom:1px solid #e8f4fb;cursor:pointer;transition:background .15s;vertical-align:middle;}
+  .subj-table tr:hover td{background:#EBF9FF;}
+  .subj-table tr:nth-child(even) td{background:#F5FCFF;}
+  .subj-pill{display:inline-block;background:linear-gradient(135deg,#FF8C42,#FFB347);color:white;border-radius:20px;padding:2px 10px;font-weight:900;font-size:.85rem;}
+  /* dialogue */
+  .dialogue{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;}
+  .dialogue.right{flex-direction:row-reverse;}
+  .bubble{padding:11px 15px;border-radius:18px;max-width:78%;font-size:.93rem;font-weight:600;line-height:1.5;cursor:pointer;transition:transform .15s;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+  .bubble:hover{transform:scale(1.02);}
+  .b-pink{background:linear-gradient(135deg,#FF9ED2,#FF6B9D);color:white;border-bottom-left-radius:4px;}
+  .b-blue{background:linear-gradient(135deg,#74D7EE,#45B7D1);color:white;border-bottom-right-radius:4px;}
+  .b-yellow{background:linear-gradient(135deg,#FFE066,#FFD700);color:#5D4037;border-bottom-left-radius:4px;}
+  .b-green{background:linear-gradient(135deg,#80CC75,#5DBB63);color:white;border-bottom-right-radius:4px;}
+  .b-purple{background:linear-gradient(135deg,#BE84D1,#9B59B6);color:white;border-bottom-left-radius:4px;}
+  .avatar{font-size:2.1rem;flex-shrink:0;animation:bobAvatar 2s ease-in-out infinite;}
+  @keyframes bobAvatar{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  /* rule box */
+  .rule-box{background:linear-gradient(135deg,#FFF9C4,#FFF176);border:3px solid #FFD600;border-radius:18px;padding:14px 18px;margin-bottom:16px;position:relative;}
+  .rule-box::before{content:'💡';position:absolute;top:-14px;left:18px;font-size:1.5rem;}
+  .rule-box h3{font-family:'Fredoka One',cursive;font-size:1rem;color:#5D4037;margin-bottom:8px;padding-top:4px;}
+  .rule-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .rule-chip{background:white;border-radius:12px;padding:5px 12px;font-size:.85rem;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+  .rc-g{color:#27AE60;border:2px solid #27AE60;}.rc-r{color:#E74C3C;border:2px solid #E74C3C;}.rc-b{color:#2980B9;border:2px solid #2980B9;}
+  /* fill blanks */
+  .fill-item{background:white;border-radius:14px;padding:11px 15px;margin-bottom:9px;font-size:.93rem;font-weight:600;color:#333;box-shadow:0 3px 8px rgba(0,0,0,.08);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .fill-input{display:inline-block;min-width:86px;padding:3px 8px;border:2px dashed #FF6B9D;border-radius:8px;background:#FFF0F7;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;color:#aaa;cursor:pointer;text-align:center;transition:all .2s;}
+  .fill-input:hover{background:#FFD6EA;}
+  .fill-input.shown{background:#E8F8E8;border-color:#27AE60;border-style:solid;color:#27AE60;}
+  /* advice grid */
+  .advice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:10px;}
+  .advice-card{background:white;border-radius:18px;padding:13px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:3px solid #eee;}
+  .advice-card:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:0 10px 25px rgba(0,0,0,.15);border-color:var(--pink);}
+  .advice-card .big-icon{font-size:2.7rem;margin-bottom:6px;}
+  .advice-card .advice-name{font-family:'Fredoka One',cursive;font-size:.9rem;color:#333;margin-bottom:5px;}
+  .advice-card .advice-do{font-size:.8rem;font-weight:700;color:#27AE60;background:#E8F8E8;border-radius:8px;padding:3px 8px;margin-bottom:4px;}
+  .advice-card .advice-dont{font-size:.8rem;font-weight:700;color:#E74C3C;background:#FDECEA;border-radius:8px;padding:3px 8px;}
+  .advice-hint1,.advice-hint2{font-size:.82rem;font-weight:700;color:#555;background:#FFF0E0;border-radius:8px;padding:4px 8px;margin-bottom:4px;text-align:left;}
+  /* game */
+  .game-area{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:24px;padding:22px;margin-bottom:22px;color:white;box-shadow:var(--card-shadow);position:relative;overflow:hidden;}
+  .game-area::before{content:'🎮';position:absolute;font-size:110px;opacity:.07;right:-10px;bottom:-20px;}
+  .game-title{font-family:'Fredoka One',cursive;font-size:1.5rem;margin-bottom:5px;text-shadow:2px 2px 0 rgba(0,0,0,.2);}
+  .game-subtitle{font-size:.88rem;opacity:.9;margin-bottom:18px;}
+  .scenario-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px;}
+  .scenario-card{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border-radius:16px;padding:12px;text-align:center;cursor:pointer;transition:all .25s;border:2px solid rgba(255,255,255,.2);}
+  .scenario-card:hover{background:rgba(255,255,255,.28);transform:translateY(-3px);border-color:rgba(255,255,255,.5);}
+  .scenario-card.revealed{background:rgba(255,215,0,.25);border-color:#FFD700;}
+  .scenario-icon{font-size:2.3rem;margin-bottom:5px;}.scenario-label{font-weight:700;font-size:.85rem;}
+  .scenario-answer{font-size:.77rem;margin-top:7px;opacity:0;transition:opacity .3s;background:rgba(255,255,255,.15);border-radius:8px;padding:5px;line-height:1.4;}
+  .scenario-card.revealed .scenario-answer{opacity:1;}
+  /* complete dialogue */
+  .dlg-wrap{background:white;border-radius:18px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+  .dlg-line{display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;}
+  .dlg-speaker{font-family:'Fredoka One',cursive;font-size:.88rem;min-width:65px;padding-top:3px;flex-shrink:0;}
+  .dlg-speaker.doc{color:#E74C3C;}.dlg-speaker.tania{color:#9B59B6;}
+  .dlg-text{flex:1;font-size:.93rem;font-weight:600;color:#333;line-height:1.6;}
+  /* pop */
+  @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+  .pop{animation:pop .3s ease;}
+  @media(max-width:600px){.bubble{max-width:90%;font-size:.86rem;}.advice-grid{grid-template-columns:1fr 1fr;}.scenario-cards{grid-template-columns:1fr 1fr;}.subj-table th,.subj-table td{padding:6px 7px;font-size:.78rem;}}
+</style>
+</head>
+<body>
+<div class="stars-bg" id="starsContainer"></div>
+<div class="cloud cloud1"></div><div class="cloud cloud2"></div><div class="cloud cloud3"></div>
+<div class="sun"></div>
+<div class="bird bird1">🐦</div><div class="bird bird2">🦋</div>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🌟 Grammar 1 🌟<br>Advice with SHOULD</h1>
+  <div class="subtitle">✨ Learn to give good advice! ✨</div>
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btnViet" onclick="toggleViet()">🇻🇳 Tiếng Việt: BẬT</button>
+    <button class="lang-btn ipa-btn" id="btnIPA" onclick="toggleIPA()">🔤 Phiên âm IPA: TẮT</button>
+  </div>
+  <div class="audio-bar">
+    <button class="audio-btn" id="btnAudio" onclick="toggleAudio()">🔊 Âm thanh: BẬT</button>
+    <button class="audio-btn" style="background:linear-gradient(135deg,#74D7EE,#45B7D1);color:#1a3a4a" onclick="readAll()">📢 Đọc tất cả</button>
+  </div>
+</div>
+
+<!-- 1: RULE -->
+<div class="section-card pink">
+  <div class="section-title"><span class="section-num num-pink">1</span>📖 Grammar Rule — Quy tắc</div>
+  <div class="rule-box">
+    <h3>SHOULD / SHOULDN'T for Advice</h3>
+    <div class="rule-row">
+      <div class="rule-chip rc-g">✅ should + V = nên làm</div>
+      <div class="rule-chip rc-r">❌ shouldn't + V = không nên</div>
+      <div class="rule-chip rc-b">❓ What should…do? = nên làm gì?</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2: SUBJECT DRILL -->
+<div class="section-card blue">
+  <div class="section-title"><span class="section-num num-blue">2</span>👥 Subjects + SHOULD / SHOULDN'T</div>
+  <p style="font-size:.83rem;color:#666;margin-bottom:10px">▶ Bấm để nghe từng câu!</p>
+  <table class="subj-table"><thead><tr><th>#</th><th>Subject</th><th>✅ should stay in bed</th><th>❌ shouldn't go to school today</th></tr></thead>
+  <tbody id="subjTbody"></tbody></table>
+</div>
+
+<!-- 3: DIALOGUE TOOTHACHE -->
+<div class="section-card orange">
+  <div class="section-title"><span class="section-num num-orange">3</span>🦷 Dialogue: Bad Toothache</div>
+  <div class="dialogue">
+    <div class="avatar">😖</div>
+    <div class="bubble b-pink">
+      <button class="play-btn" onclick="s(event,'I have a bad toothache. What should I do?')">▶</button>
+      <span id="s_dlg1"></span> I have a bad toothache. <span class="qword">What should I do?</span>
+      <span class="viet">Tôi bị đau răng nặng. Tôi nên làm gì?</span>
+      <span class="ipa-text">/aɪ hæv ə bæd ˈtuːθeɪk. wɒt ʃʊd aɪ duː/</span>
+    </div>
+  </div>
+  <div class="dialogue right">
+    <div class="avatar">🧒</div>
+    <div class="bubble b-blue">
+      <button class="play-btn bp" onclick="s(event,'You shouldn\'t wait any longer!')">▶</button>
+      <span id="s_dlg2"></span> You <span class="shouldnt">shouldn't</span> wait any longer!
+      <span class="viet">Bạn không nên chờ thêm nữa!</span>
+      <span class="ipa-text">/juː ˈʃʊdnt weɪt ˈeni ˈlɒŋɡər/</span>
+    </div>
+  </div>
+  <div class="dialogue right">
+    <div class="avatar">👩</div>
+    <div class="bubble b-yellow">
+      <button class="play-btn op" onclick="s(event,'Your mom should take you to the dentist.')">▶</button>
+      <span id="s_dlg3"></span> Your mom <span class="should">should</span> take you to the dentist. 🦷
+      <span class="viet">Mẹ bạn nên đưa bạn đến nha sĩ.</span>
+      <span class="ipa-text">/jɔːr mɒm ʃʊd teɪk juː tə ðə ˈdentɪst/</span>
+    </div>
+  </div>
+</div>
+
+<!-- 4: MORE SENTENCES -->
+<div class="section-card green">
+  <div class="section-title"><span class="section-num num-green">4</span>💊 More Advice Sentences</div>
+  <div id="moreSent"></div>
+</div>
+
+<!-- 5: Q&A -->
+<div class="section-card purple">
+  <div class="section-title"><span class="section-num num-purple">5</span>❓ Questions &amp; Answers</div>
+  <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:#9B59B6;margin-bottom:8px;">🙋 Questions:</div>
+  <div id="qaQ"></div>
+  <div style="font-family:'Fredoka One',cursive;font-size:.95rem;color:#27AE60;margin:12px 0 8px;">✅ Answers:</div>
+  <div id="qaA"></div>
+</div>
+
+<!-- 6: FILL BLANKS -->
+<div class="section-card teal">
+  <div class="section-title"><span class="section-num num-teal">6</span>✏️ Fill in the Blanks — Điền vào chỗ trống</div>
+  <p style="font-size:.83rem;color:#666;margin-bottom:10px">👆 Bấm ô <span style="background:#FFF0F7;border:2px dashed #FF6B9D;border-radius:5px;padding:0 6px;font-weight:700">???</span> để xem đáp án!</p>
+  <div id="fillDiv"></div>
+</div>
+
+<!-- 7: WRITE ADVICE -->
+<div class="section-card orange">
+  <div class="section-title"><span class="section-num num-orange">7</span>👨‍👩‍👧 Write Advice for the Family</div>
+  <div class="advice-grid" id="adviceGrid"></div>
+</div>
+
+<!-- 8: COMPLETE DIALOGUE -->
+<div class="section-card red">
+  <div class="section-title"><span class="section-num num-red">8</span>🏥 Complete the Dialogue — Hoàn thành hội thoại</div>
+  <p style="font-size:.83rem;color:#666;margin-bottom:12px">👆 Bấm ô trống để xem đáp án! Bấm ▶ để nghe!</p>
+  <div class="dlg-wrap" id="completeDlg"></div>
+</div>
+
+<!-- 9: GAME -->
+<div class="game-area">
+  <div class="game-title">🎮 Game: Guess &amp; Give Advice!</div>
+  <div class="game-subtitle">👇 Bấm thẻ để lật &amp; cho lời khuyên! Click to flip &amp; advise!</div>
+  <div class="scenario-cards" id="gameCards"></div>
+</div>
+
+<div style="text-align:center;padding:20px 0;font-size:2rem">⭐🌈🎉🌟💪🎊⭐</div>
+</div><!-- /container -->
+
+<script>
+// ── state ─────────────────────────────────────────────────
+let vietOn=true,ipaOn=false,audioOn=true;
+const synth=window.speechSynthesis;
+let cnt=0; // global sentence counter
+
+// ── stars ─────────────────────────────────────────────────
+const sc=document.getElementById('starsContainer');
+for(let i=0;i<18;i++){const st=document.createElement('div');st.className='star';st.textContent=['⭐','🌟','✨','💫'][i%4];st.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*100}vh;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*2}s`;sc.appendChild(st);}
+
+// ── audio mapping: text → wav file number ─────────────────
+const _audioMap={
+  // Section 3: Dialogue toothache
+  "I have a bad toothache. What should I do?":"1",
+  "You shouldn't wait any longer!":"2",
+  "Your mom should take you to the dentist.":"3",
+  // Section 2: Subject table (I/You/He/She/We/They)
+  "I should stay in bed.":"4",
+  "I shouldn't go to school today.":"5",
+  "You should stay in bed.":"6",
+  "You shouldn't go to school today.":"7",
+  "He should stay in bed.":"8",
+  "He shouldn't go to school today.":"9",
+  "She should stay in bed.":"10",
+  "She shouldn't go to school today.":"11",
+  "We should stay in bed.":"12",
+  "We shouldn't go to school today.":"13",
+  "They should stay in bed.":"14",
+  "They shouldn't go to school today.":"15",
+  // Section 4: More sentences
+  "He has a stomachache. He shouldn't eat right now.":"16",
+  "You should take your medicine if you are sick.":"17",
+  "She has a toothache. She should go to the dentist.":"18",
+  "He has a cast on his arm. He shouldn't play soccer.":"19",
+  "There aren't any bandages. We should buy some.":"20",
+  // Section 5: Q&A
+  "I'm sick. What should I do?":"21",
+  "Should I stay home?":"22",
+  // "You should stay in bed." already #6, remap answer version:
+  "You shouldn't go to school.":"24",
+  "Yes, you should.":"25",
+  "No, you shouldn't.":"26",
+  // Section 6: Fill blanks
+  "If you have a headache, you should not eat any more ice cream.":"27",
+  "He has a fever. He should not go to school.":"28",
+  "She feels dizzy. She should sit down.":"29",
+  "When you have a cold, you should not sneeze on people.":"30",
+  "What should you do when you have a toothache?":"31",
+  "You should exercise an hour every day.":"32",
+  // Section 7: Advice cards
+  "The boy has a fever. He should stay home. He shouldn't go to school.":"33",
+  "The girl has a toothache. She should go to the dentist. She shouldn't eat so much candy.":"34",
+  "Mom has a cold. She shouldn't cough on other people. She should cover her mouth.":"35",
+  "Dad feels dizzy. He should lie down. He shouldn't drive his car.":"36",
+  // Section 8: Complete dialogue
+  "OK, Tania. Do you have any questions before you go?":"37",
+  "Yes. What should I do to get better? Should I rest a lot?":"38",
+  "Yes, you should. You need to get strong.":"39",
+  "So I shouldn't play sports. That's good. I hate sports.":"40",
+  "You do need exercise. Why don't you ride your bike with your friends?":"41",
+  "We love riding our bikes! Should we ride our bikes every day?":"42",
+  "No, you shouldn't ride your bike every day. Three times a week is fine.":"43",
+  // Section 9: Game cards
+  "You have a cold! You should use tissues. You shouldn't sneeze near me!":"44",
+  "You have a toothache! You should see a dentist. You shouldn't eat candy!":"45",
+  "You have a fever! You should rest in bed. You shouldn't go outside!":"46",
+  "Stomachache! You should drink water. You shouldn't eat now!":"47",
+  "Broken arm! You should see a doctor. You shouldn't play sports!":"48",
+  "You feel dizzy! You should sit down. You shouldn't drive!":"49",
+};
+// Section 5 answer #23 is same text as #6 but different wav
+// We track sentence counter to resolve duplicates
+let _currentAudio=null;
+function playWav(num){
+  if(!audioOn)return;
+  if(_currentAudio){_currentAudio.pause();_currentAudio.currentTime=0;}
+  const a=new Audio(num+'.wav');
+  _currentAudio=a;
+  a.play().catch(()=>{/* file not found, silent */});
+}
+function speak(text){
+  if(!audioOn||typeof text!=='string')return;
+  // Try wav map first
+  const num=_audioMap[text.trim()];
+  if(num){playWav(num);return;}
+  // Fallback: TTS
+  if(synth.speaking)synth.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.85;u.pitch=1.1;synth.speak(u);
+}
+function s(e,text){e.stopPropagation();playClick();speak(text);}
+function playClick(){if(!audioOn)return;try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type='sine';o.frequency.value=640;g.gain.setValueAtTime(.12,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.1);o.start(ctx.currentTime);o.stop(ctx.currentTime+.1);}catch(e){}}
+
+// ── toggles ───────────────────────────────────────────────
+function toggleViet(){vietOn=!vietOn;document.getElementById('btnViet').textContent='🇻🇳 Tiếng Việt: '+(vietOn?'BẬT':'TẮT');document.getElementById('btnViet').classList.toggle('active',vietOn);document.querySelectorAll('.viet').forEach(el=>el.style.display=vietOn?'block':'none');playClick();}
+function toggleIPA(){ipaOn=!ipaOn;document.getElementById('btnIPA').textContent='🔤 Phiên âm IPA: '+(ipaOn?'BẬT':'TẮT');document.getElementById('btnIPA').classList.toggle('active',ipaOn);document.querySelectorAll('.ipa-text').forEach(el=>el.style.display=ipaOn?'block':'none');playClick();}
+function toggleAudio(){audioOn=!audioOn;document.getElementById('btnAudio').textContent='🔊 Âm thanh: '+(audioOn?'BẬT':'TẮT');document.getElementById('btnAudio').classList.toggle('muted',!audioOn);if(!audioOn){if(synth.speaking)synth.cancel();if(_currentAudio){_currentAudio.pause();_currentAudio.currentTime=0;}}playClick();}
+
+// ── helpers ───────────────────────────────────────────────
+function n(){return ++cnt;}
+function numBadge(col){return `<span class="snum" style="background:${col}">${cnt}</span>`;}
+function hi(text){return text.replace(/shouldn't/g,'<span class="shouldnt">shouldn\'t</span>').replace(/\bshould\b/g,'<span class="should">should</span>').replace(/What should|Should I|Should we/g,m=>`<span class="qword">${m}</span>`);}
+function esc(t){return t.replace(/'/g,"\\'");}
+
+function sentRow(enText,vi,ipa,btnCls,color){
+  n();
+  return `<div class="sent-row" onclick="speak('${esc(enText)}');playClick();">
+    <button class="play-btn ${btnCls}" onclick="s(event,'${esc(enText)}')">▶</button>
+    ${numBadge(color)}
+    <span class="sent-content">${hi(enText)}
+      <span class="viet">${vi}</span>
+      <span class="ipa-text">${ipa}</span>
+    </span>
+  </div>`;
+}
+
+// ── assign numbers to Section 3 inline spans ──────────────
+// (done after build so we just increment manually)
+let dlgNums=[];for(let i=0;i<3;i++){dlgNums.push(n());}
+document.getElementById('s_dlg1').textContent=dlgNums[0]+'.';
+document.getElementById('s_dlg2').textContent=dlgNums[1]+'.';
+document.getElementById('s_dlg3').textContent=dlgNums[2]+'.';
+
+// ── SECTION 2: Subject table ───────────────────────────────
+const subjects=[
+  ['I','I should stay in bed.','Tôi nên nằm nghỉ.','I shouldn\'t go to school today.','Tôi không nên đi học hôm nay.'],
+  ['You','You should stay in bed.','Bạn nên nằm nghỉ.','You shouldn\'t go to school today.','Bạn không nên đi học hôm nay.'],
+  ['He','He should stay in bed.','Anh ấy nên nằm nghỉ.','He shouldn\'t go to school today.','Anh ấy không nên đi học hôm nay.'],
+  ['She','She should stay in bed.','Cô ấy nên nằm nghỉ.','She shouldn\'t go to school today.','Cô ấy không nên đi học hôm nay.'],
+  ['We','We should stay in bed.','Chúng tôi nên nằm nghỉ.','We shouldn\'t go to school today.','Chúng tôi không nên đi học hôm nay.'],
+  ['They','They should stay in bed.','Họ nên nằm nghỉ.','They shouldn\'t go to school today.','Họ không nên đi học hôm nay.'],
+];
+// we need to insert numbers BEFORE the table renders, but table is already in DOM.
+// So we generate the table rows dynamically:
+const tbody=document.getElementById('subjTbody');
+subjects.forEach((r,i)=>{
+  const n1=n(), n2=n();
+  tbody.innerHTML+=`<tr>
+    <td style="font-weight:800;color:#888">${i+1}</td>
+    <td><span class="subj-pill">${r[0]}</span></td>
+    <td onclick="speak('${esc(r[1])}');playClick();">
+      <button class="play-btn gp" onclick="s(event,'${esc(r[1])}')">▶</button>
+      <span style="font-weight:800;font-size:.78rem;color:#aaa">${n1}.</span>
+      <span class="should">should</span> stay in bed.
+      <span class="viet">${r[2]}</span>
+    </td>
+    <td onclick="speak('${esc(r[3])}');playClick();">
+      <button class="play-btn" onclick="s(event,'${esc(r[3])}')">▶</button>
+      <span style="font-weight:800;font-size:.78rem;color:#aaa">${n2}.</span>
+      <span class="shouldnt">shouldn't</span> go to school today.
+      <span class="viet">${r[4]}</span>
+    </td>
+  </tr>`;
+});
+
+// ── SECTION 4: More sentences ─────────────────────────────
+const more=[
+  ["He has a stomachache. He shouldn't eat right now.","Anh ấy bị đau bụng. Không nên ăn ngay.","/hiː ˈʃʊdnt iːt raɪt naʊ/","op","linear-gradient(135deg,#FF8C42,#FFB347)","🤢"],
+  ["You should take your medicine if you are sick.","Bạn nên uống thuốc nếu bị bệnh.","/juː ʃʊd teɪk jɔːr ˈmedɪsɪn/","gp","linear-gradient(135deg,#5DBB63,#80CC75)","💊"],
+  ["She has a toothache. She should go to the dentist.","Cô ấy đau răng. Nên đến nha sĩ.","/ʃiː ʃʊd ɡoʊ tə ðə ˈdentɪst/","gp","linear-gradient(135deg,#5DBB63,#80CC75)","🦷"],
+  ["He has a cast on his arm. He shouldn't play soccer.","Anh ấy bó bột tay. Không nên chơi bóng đá.","/hiː ˈʃʊdnt pleɪ ˈsɒkər/","","linear-gradient(135deg,#FF6B9D,#FF9ED2)","🦾"],
+  ["There aren't any bandages. We should buy some.","Không có băng gạc. Chúng ta nên mua thêm.","/wiː ʃʊd baɪ sʌm/","bp","linear-gradient(135deg,#45B7D1,#4ECDC4)","🩹"],
+];
+const msEl=document.getElementById('moreSent');
+more.forEach(r=>{
+  n();
+  msEl.innerHTML+=`<div class="sent-row" onclick="speak('${esc(r[0])}');playClick();">
+    <button class="play-btn ${r[4].includes('FF8C')?'op':r[4].includes('5DBB')?'gp':r[4].includes('45B7')?'bp':''}" onclick="s(event,'${esc(r[0])}')">▶</button>
+    <span class="snum" style="background:${r[4]}">${cnt}</span>
+    <span class="sent-content">${r[5]} ${hi(r[0])}<span class="viet">${r[1]}</span><span class="ipa-text">${r[2]}</span></span>
+  </div>`;
+});
+
+// ── SECTION 5: Q&A ────────────────────────────────────────
+const qq=[
+  ["I'm sick. What should I do?","Tôi bị bệnh. Tôi nên làm gì?","/aɪm sɪk. wɒt ʃʊd aɪ duː/"],
+  ["Should I stay home?","Tôi có nên ở nhà không?","/ʃʊd aɪ steɪ hoʊm/"],
+];
+const qaWav=["23","24","25","26"];
+const qa=[
+  ["You should stay in bed.","Bạn nên nằm nghỉ.","/juː ʃʊd steɪ ɪn bed/"],
+  ["You shouldn't go to school.","Bạn không nên đi học.","/juː ˈʃʊdnt ɡoʊ tə skuːl/"],
+  ["Yes, you should.","Vâng, bạn nên.","/jes juː ʃʊd/"],
+  ["No, you shouldn't.","Không, bạn không nên.","/noʊ juː ˈʃʊdnt/"],
+];
+const qEl=document.getElementById('qaQ'),aEl=document.getElementById('qaA');
+qq.forEach(r=>{
+  n();
+  qEl.innerHTML+=`<div class="sent-row" onclick="speak('${esc(r[0])}');playClick();">
+    <button class="play-btn pp" onclick="s(event,'${esc(r[0])}')">▶</button>
+    <span class="snum" style="background:linear-gradient(135deg,#9B59B6,#BE84D1)">${cnt}</span>
+    <span class="sent-content qword">${hi(r[0])}<span class="viet">${r[1]}</span><span class="ipa-text">${r[2]}</span></span>
+  </div>`;
+});
+qa.forEach(function(r,i){
+  n();
+  var wNum=qaWav[i];
+  aEl.innerHTML+=`<div class="sent-row" onclick="playWav('${wNum}');playClick();">
+    <button class="play-btn gp" onclick="event.stopPropagation();playWav('${wNum}');playClick();">▶</button>
+    <span class="snum" style="background:linear-gradient(135deg,#27AE60,#52d68a)">${cnt}</span>
+    <span class="sent-content">${hi(r[0])}<span class="viet">${r[1]}</span><span class="ipa-text">${r[2]}</span></span>
+  </div>`;
+});
+
+// ── SECTION 6: Fill blanks ─────────────────────────────────
+const fills=[
+  {pre:"🍦 If you have a headache, you",ans:"should not eat",ansvi:"không nên ăn",post:"any more ice cream.",full:"If you have a headache, you should not eat any more ice cream.",vi:"Nếu đau đầu, bạn không nên ăn thêm kem."},
+  {pre:"🤒 He has a fever. He",ans:"should not go",ansvi:"không nên đi",post:"to school.",full:"He has a fever. He should not go to school.",vi:"Anh ấy bị sốt. Anh ấy không nên đi học."},
+  {pre:"😵 She feels dizzy. She",ans:"should sit",ansvi:"nên ngồi xuống",post:"down.",full:"She feels dizzy. She should sit down.",vi:"Cô ấy chóng mặt. Cô ấy nên ngồi xuống."},
+  {pre:"🤧 When you have a cold, you",ans:"should not sneeze",ansvi:"không nên hắt hơi",post:"on people.",full:"When you have a cold, you should not sneeze on people.",vi:"Khi bị cảm, không nên hắt hơi vào người khác."},
+  {pre:"🦷 What",ans:"should you do",ansvi:"bạn nên làm gì",post:"when you have a toothache?",full:"What should you do when you have a toothache?",vi:"Bạn nên làm gì khi bị đau răng?"},
+  {pre:"🏃 You",ans:"should exercise",ansvi:"nên tập thể dục",post:"an hour every day.",full:"You should exercise an hour every day.",vi:"Bạn nên tập thể dục một tiếng mỗi ngày."},
+];
+const fbEl=document.getElementById('fillDiv');
+fills.forEach(r=>{
+  n();
+  fbEl.innerHTML+=`<div class="fill-item">
+    <button class="play-btn tp" onclick="s(event,'${esc(r.full)}')">▶</button>
+    <span class="snum" style="background:linear-gradient(135deg,#20B2AA,#48D1CC)">${cnt}</span>
+    ${r.pre}
+    <span class="fill-input" onclick="showAns(this,'${esc(r.ans)}','${r.ansvi}')">???</span>
+    ${r.post}
+    <span class="viet">${r.vi}</span>
+  </div>`;
+});
+function showAns(el,ans,vi){el.classList.add('shown','pop');el.textContent=ans;el.title=vi;setTimeout(()=>el.classList.remove('pop'),300);speak(ans);playClick();}
+
+// ── SECTION 7: Advice cards (flip mechanic, no apostrophes in onclick) ───
+const advCards=[
+  {fIcon:'👦',fLabel:'Boy',   fHint1:'Stay home.',              fHint2:"Don't go to school.",
+   bIcon:'🤒', do1:'He should stay home.',         do1vi:'Nên ở nhà.',
+   dont1:"He shouldn't go to school.",             dont1vi:'Không nên đi học.',
+   ansEn:"The boy has a fever. He should stay home. He shouldn't go to school.",
+   ansVi:'Cậu bé bị sốt. Cậu bé nên ở nhà. Cậu bé không nên đi học.'},
+  {fIcon:'👧',fLabel:'Girl',  fHint1:'Go to the dentist.',      fHint2:"Don't eat so much candy.",
+   bIcon:'🦷', do1:'She should go to the dentist.', do1vi:'Nên đi nha sĩ.',
+   dont1:"She shouldn't eat so much candy.",        dont1vi:'Không nên ăn nhiều kẹo.',
+   ansEn:"The girl has a toothache. She should go to the dentist. She shouldn't eat so much candy.",
+   ansVi:'Cô bé đau răng. Cô bé nên đi nha sĩ. Cô bé không nên ăn nhiều kẹo.'},
+  {fIcon:'👩',fLabel:'Mom',   fHint1:"Don't cough on other people.", fHint2:'Cover your mouth.',
+   bIcon:'🤧', do1:'She should cover her mouth.',   do1vi:'Nên che miệng.',
+   dont1:"She shouldn't cough on other people.",    dont1vi:'Không nên ho vào người khác.',
+   ansEn:"Mom has a cold. She shouldn't cough on other people. She should cover her mouth.",
+   ansVi:'Mẹ bị cảm. Mẹ không nên ho vào người khác. Mẹ nên che miệng.'},
+  {fIcon:'👨',fLabel:'Dad',   fHint1:'Lie down.',               fHint2:"Don't drive your car.",
+   bIcon:'😵', do1:'He should lie down.',           do1vi:'Nên nằm xuống.',
+   dont1:"He shouldn't drive his car.",             dont1vi:'Không nên lái xe.',
+   ansEn:"Dad feels dizzy. He should lie down. He shouldn't drive his car.",
+   ansVi:'Bố chóng mặt. Bố nên nằm xuống. Bố không nên lái xe.'},
+];
+const agEl=document.getElementById('adviceGrid');
+// store all card speech texts in a plain array to avoid inline-attr escaping issues
+window._advSpeech=[33,34,35,36]; // wav file numbers
+advCards.forEach(function(c,idx){
+  n();
+  var num=cnt;
+  var id='ac'+idx;
+  agEl.innerHTML+=
+    '<div class="advice-card" id="'+id+'" onclick="flipAC('+idx+')" style="min-height:200px">'+
+      '<div id="'+id+'F">'+
+        '<div class="big-icon">'+c.fIcon+'</div>'+
+        '<div class="advice-name">'+num+'. '+c.fLabel+'</div>'+
+        '<div class="advice-hint1">👉 '+c.fHint1+'<span class="viet">'+c.dont1vi+'</span></div>'+
+        '<div class="advice-hint2">👉 '+c.fHint2+'<span class="viet">'+c.do1vi+'</span></div>'+
+        '<div style="margin-top:8px;font-size:.74rem;color:#bbb;font-weight:700">👆 Tap for answer!</div>'+
+      '</div>'+
+      '<div id="'+id+'B" style="display:none">'+
+        '<div class="big-icon">'+c.bIcon+'</div>'+
+        '<div class="advice-name" style="color:#9B59B6">'+num+'. Answer</div>'+
+        '<div class="advice-do">✅ '+c.do1+'<span class="viet">'+c.do1vi+'</span></div>'+
+        '<div class="advice-dont">❌ '+c.dont1+'<span class="viet">'+c.dont1vi+'</span></div>'+
+        '<div style="font-size:.77rem;font-weight:700;color:#555;margin-top:6px;line-height:1.5">'+c.ansEn+'<span class="viet">'+c.ansVi+'</span></div>'+
+        '<button class="play-btn gp" onclick="event.stopPropagation();playWav(window._advSpeech['+idx+']);playClick();" style="margin-top:8px;width:100%;border-radius:10px;height:28px;font-size:.75rem">▶ Play</button>'+
+      '</div>'+
+    '</div>';
+});
+function flipAC(idx){
+  var id='ac'+idx;
+  var f=document.getElementById(id+'F');
+  var b=document.getElementById(id+'B');
+  var card=document.getElementById(id);
+  var open=b.style.display!=='none';
+  f.style.display=open?'block':'none';
+  b.style.display=open?'none':'block';
+  card.style.borderColor=open?'#eee':'#9B59B6';
+  if(!open){playWav(window._advSpeech[idx]);playClick();}else{playClick();}
+}
+
+// ── SECTION 8: Complete dialogue ──────────────────────────
+// Store speech strings in a window array to avoid apostrophe-in-attr issues
+window._dlgSpeech=[37,38,39,40,41,42,43];  // wav file numbers
+
+window._dlgViet=[
+  "OK Tania. Em có câu hỏi nào trước khi về không?",
+  "Vâng. Em nên làm gì để khỏe lại? Em có nên nghỉ ngơi nhiều không?",
+  "Vâng, em nên. Em cần phải mạnh khỏe lại.",
+  "Vậy em không nên chơi thể thao. Tốt quá. Em ghét thể thao.",
+  "Em vẫn cần tập thể dục. Sao em không đạp xe cùng bạn bè?",
+  "Chúng em thích đạp xe lắm! Chúng em có nên đạp xe mỗi ngày không?",
+  "Không, các em không nên đạp xe mỗi ngày. Ba lần mỗi tuần là đủ."
+];
+const dlgHtmlLines=[
+  'OK, Tania. Do you have any questions before you go?',
+  'Yes. What <span class="fill-input" onclick="showAns(this,\'should I do\',\'em nên làm gì\')">???</span> to get better? <span class="fill-input" onclick="showAns(this,\'Should I rest\',\'Em có nên nghỉ ngơi\')">???</span> a lot?',
+  'Yes, you <span class="fill-input" onclick="showAns(this,\'should\',\'nên\')">???</span>. You need to get strong.',
+  'So <span class="fill-input" onclick="showAns(this,\'I should not play\',\'em không nên chơi\')">???</span> sports. That\'s good. I hate sports.',
+  "You do need exercise. Why don't you ride your bike with your friends?",
+  'We love riding our bikes! <span class="fill-input" onclick="showAns(this,\'Should we ride\',\'Chúng em có nên đạp\')">???</span> our bikes every day?',
+  'No, <span class="fill-input" onclick="showAns(this,\'you should not ride\',\'các em không nên đạp\')">???</span> your bike every day. Three times a week is fine.'
+];
+const dlgMeta=[
+  {spk:'Doctor',cls:'doc',  icon:'👨‍⚕️'},
+  {spk:'Tania', cls:'tania',icon:'👧'},
+  {spk:'Doctor',cls:'doc',  icon:'👨‍⚕️'},
+  {spk:'Tania', cls:'tania',icon:'👧'},
+  {spk:'Doctor',cls:'doc',  icon:'👨‍⚕️'},
+  {spk:'Tania', cls:'tania',icon:'👧'},
+  {spk:'Doctor',cls:'doc',  icon:'👨‍⚕️'},
+];
+const dlgEl=document.getElementById('completeDlg');
+dlgMeta.forEach(function(line,i){
+  n();
+  dlgEl.innerHTML+=
+    '<div class="dlg-line">'+
+      '<button class="play-btn '+(line.cls==='doc'?'':'pp')+'" onclick="playWav(window._dlgSpeech['+i+']);playClick();">▶</button>'+
+      '<span class="snum" style="background:linear-gradient(135deg,#E74C3C,#FF7675)">'+cnt+'</span>'+
+      '<span class="dlg-speaker '+line.cls+'">'+line.icon+' '+line.spk+':</span>'+
+      '<span class="dlg-text">'+dlgHtmlLines[i]+
+        '<span class="viet">'+window._dlgViet[i]+'</span>'+
+      '</span>'+
+    '</div>';
+});
+
+// ── SECTION 9: Game ───────────────────────────────────────
+const scenarios=[
+  {icon:'🤧',label:'Achoo! 🤧',          en:"You have a cold! You should use tissues. You shouldn't sneeze near me!", vi:'Bạn bị cảm! Dùng khăn giấy! Đừng hắt hơi gần tôi!'},
+  {icon:'🦷',label:'Ouch! My tooth! 😖', en:"You have a toothache! You should see a dentist. You shouldn't eat candy!", vi:'Bạn đau răng! Nên gặp nha sĩ! Đừng ăn kẹo!'},
+  {icon:'🤒',label:'I feel hot! 🌡️',      en:"You have a fever! You should rest in bed. You shouldn't go outside!", vi:'Bạn bị sốt! Nên nghỉ ngơi! Đừng ra ngoài!'},
+  {icon:'🤢',label:'Tummy hurts!',        en:"Stomachache! You should drink water. You shouldn't eat now!", vi:'Đau bụng! Nên uống nước! Đừng ăn ngay!'},
+  {icon:'🦾',label:'My arm! 😢',          en:"Broken arm! You should see a doctor. You shouldn't play sports!", vi:'Gãy tay! Nên gặp bác sĩ! Đừng chơi thể thao!'},
+  {icon:'😵',label:'Everything spins!',   en:"You feel dizzy! You should sit down. You shouldn't drive!", vi:'Chóng mặt! Nên ngồi xuống! Đừng lái xe!'},
+];
+const gcEl=document.getElementById('gameCards');
+const gameWavStart=44;
+scenarios.forEach((r,idx)=>{
+  n();
+  const wNum=gameWavStart+idx;
+  gcEl.innerHTML+=`<div class="scenario-card" onclick="revealCard(this,'${wNum}')">
+    <div class="scenario-icon">${r.icon}</div>
+    <div class="scenario-label">${cnt}. ${r.label}</div>
+    <div class="scenario-answer">
+      <strong>${r.en.split('. ')[0]}!</strong><br>
+      ✅ ${r.en.split('. ')[1]||''}<br>
+      ❌ ${r.en.split('. ')[2]||''}<br>
+      <span style="opacity:.8;font-size:.73rem">${r.vi}</span>
+    </div>
+  </div>`;
+});
+function revealCard(el,wNum){el.classList.toggle('revealed');if(el.classList.contains('revealed'))playWav(wNum);playClick();}
+
+// ── init ──────────────────────────────────────────────────
+document.querySelectorAll('.ipa-text').forEach(el=>el.style.display='none');
+document.querySelectorAll('.viet').forEach(el=>el.style.display='block');
+
+// ── read all ──────────────────────────────────────────────
+function readAll(){
+  if(!audioOn){audioOn=true;document.getElementById('btnAudio').textContent='🔊 Âm thanh: BẬT';}
+  // Play all 49 wavs in sequence
+  let i=1;
+  function playNext(){
+    if(i>49)return;
+    const a=new Audio(i+'.wav');
+    _currentAudio=a;
+    a.onended=()=>{i++;playNext();};
+    a.onerror=()=>{i++;playNext();};
+    a.play().catch(()=>{i++;playNext();});
+  }
+  playNext();
+}
+
+// welcome - removed TTS, audio files handle all playback
+</script>
+</body>
+</html>
